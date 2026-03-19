@@ -237,9 +237,12 @@ class _TripPlanningScreenState extends State<TripPlanningScreen> {
 
   Color _getPageColor(int pageIndex) {
     switch (pageIndex) {
-      case 0: return Colors.blue.shade700;
-      case 1: return Colors.teal.shade700;
-      default: return Colors.blue.shade700;
+      case 0:
+        return Colors.blue.shade700;
+      case 1:
+        return Colors.teal.shade700;
+      default:
+        return Colors.blue.shade700;
     }
   }
 
@@ -280,9 +283,10 @@ class _TripPlanningScreenState extends State<TripPlanningScreen> {
 
     switch (_currentPage) {
       case 0:
-        if (provider.tripDetails.destination.isEmpty) {
+        if (provider.tripDetails.source.isEmpty ||
+            provider.tripDetails.destination.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Please enter destination details')),
+            const SnackBar(content: Text('Please enter source and destination details')),
           );
           return false;
         }

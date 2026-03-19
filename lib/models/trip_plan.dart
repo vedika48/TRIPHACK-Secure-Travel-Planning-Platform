@@ -1,4 +1,3 @@
-// models/trip_plan.dart
 class TripDetails {
   final String source;
   String destination;
@@ -11,7 +10,7 @@ class TripDetails {
   String specialRequirements;
 
   TripDetails({
-    this.source = ' ',
+    this.source = '',
     this.destination = '',
     this.purpose = '',
     required this.startDate,
@@ -26,7 +25,7 @@ class TripDetails {
 
   Map<String, dynamic> toMap() {
     return {
-      'source' : source,
+      'source': source,
       'destination': destination,
       'purpose': purpose,
       'startDate': startDate.toIso8601String(),
@@ -128,6 +127,7 @@ class TripPlan {
       id: map['id'] ?? '',
       userId: map['userId'] ?? '',
       details: TripDetails(
+        source: map['details']['source'] ?? '',
         destination: map['details']['destination'] ?? '',
         purpose: map['details']['purpose'] ?? '',
         startDate: DateTime.parse(map['details']['startDate']),
@@ -145,6 +145,4 @@ class TripPlan {
       status: map['status'] ?? 'planned',
     );
   }
-
-  static Future<TripPlan> (data) async {}
 }

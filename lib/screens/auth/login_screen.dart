@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuthException;
 import '../../providers/auth_provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -398,6 +399,9 @@ class LoginScreenState extends State<LoginScreen> {
       } else {
         _showErrorSnackBar(context, 'Login failed. Please check your credentials.');
       }
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+      _showErrorSnackBar(context, e.message ?? 'Authentication failed');
     } catch (e) {
       if (!mounted) return;
       _showErrorSnackBar(context, 'Login error: ${e.toString()}');
@@ -415,6 +419,9 @@ class LoginScreenState extends State<LoginScreen> {
       } else {
         _showErrorSnackBar(context, 'Google sign-in was cancelled');
       }
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+      _showErrorSnackBar(context, e.message ?? 'Google sign-in failed');
     } catch (e) {
       if (!mounted) return;
       _showErrorSnackBar(context, 'Google sign-in failed: ${e.toString()}');
@@ -432,6 +439,9 @@ class LoginScreenState extends State<LoginScreen> {
       } else {
         _showErrorSnackBar(context, 'Facebook sign-in was cancelled');
       }
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+      _showErrorSnackBar(context, e.message ?? 'Facebook sign-in failed');
     } catch (e) {
       if (!mounted) return;
       _showErrorSnackBar(context, 'Facebook sign-in failed: ${e.toString()}');
@@ -550,6 +560,15 @@ class LoginScreenState extends State<LoginScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
+                            ),
+                          );
+                        } on FirebaseAuthException catch (e) {
+                          if (!mounted) return;
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(e.message ?? 'An error occurred'),
+                              backgroundColor: Colors.red.shade600,
                             ),
                           );
                         } catch (e) {

@@ -65,12 +65,20 @@ class ProfileScreen extends StatelessWidget {
               color: Colors.white.withOpacity(0.2),
               shape: BoxShape.circle,
               border: Border.all(color: Colors.white.withOpacity(0.3), width: 3),
+              image: user?.photoUrl != null && user!.photoUrl!.isNotEmpty
+                  ? DecorationImage(
+                      image: NetworkImage(user.photoUrl!),
+                      fit: BoxFit.cover,
+                    )
+                  : null,
             ),
-            child: Icon(
-              Icons.person_rounded,
-              size: 40,
-              color: Colors.white,
-            ),
+            child: user?.photoUrl == null || user!.photoUrl!.isEmpty
+                ? const Icon(
+                    Icons.person_rounded,
+                    size: 40,
+                    color: Colors.white,
+                  )
+                : null,
           ),
           const SizedBox(width: 20),
           Expanded(
@@ -142,10 +150,12 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
             _buildInfoRow('Full Name', user?.name ?? 'Not provided'),
             _buildInfoRow('Email', user?.email ?? 'Not provided'),
-            _buildInfoRow('Age', user?.age.toString() ?? 'Not provided'),
-            _buildInfoRow('Address', user?.address ?? 'Not provided'),
+            _buildInfoRow('Age', user != null && user.age > 0 ? user.age.toString() : 'Not provided'),
+            _buildInfoRow('Address', user != null && user.address.isNotEmpty ? user.address : 'Not provided'),
             _buildInfoRow('Location',
-                '${user?.latitude?.toStringAsFixed(4) ?? 'N/A'}, ${user?.longitude?.toStringAsFixed(4) ?? 'N/A'}'),
+                user != null && (user.latitude != 0.0 || user.longitude != 0.0)
+                    ? '${user.latitude.toStringAsFixed(4)}, ${user.longitude.toStringAsFixed(4)}'
+                    : 'Location not provided'),
           ],
         ),
       ),

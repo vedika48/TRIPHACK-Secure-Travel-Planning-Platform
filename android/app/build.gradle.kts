@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.travel_agent"
-    compileSdk = 34
+    compileSdk = 35
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -25,7 +25,7 @@ android {
     defaultConfig {
         applicationId = "com.example.travel_agent"
         minSdk = flutter.minSdkVersion
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
     }

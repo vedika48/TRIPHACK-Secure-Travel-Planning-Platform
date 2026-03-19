@@ -10,6 +10,7 @@ class UserModel {
   final double longitude;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final String? photoUrl;
 
   UserModel({
     required this.uid,
@@ -21,6 +22,7 @@ class UserModel {
     required this.longitude,
     this.createdAt,
     this.updatedAt,
+    this.photoUrl,
   });
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
@@ -28,12 +30,13 @@ class UserModel {
       uid: map['uid'] ?? '',
       name: map['name'] ?? '',
       email: map['email'] ?? '',
-      age: map['age'] ?? 0,
+      age: map['age'] != null && map['age'] != '' ? (map['age'] is int ? map['age'] : int.tryParse(map['age'].toString()) ?? 0) : 0,
       address: map['address'] ?? '',
       latitude: (map['latitude'] ?? 0.0).toDouble(),
       longitude: (map['longitude'] ?? 0.0).toDouble(),
       createdAt: map['createdAt'] != null ? (map['createdAt'] as Timestamp).toDate() : null,
       updatedAt: map['updatedAt'] != null ? (map['updatedAt'] as Timestamp).toDate() : null,
+      photoUrl: map['photoUrl'],
     );
   }
 
@@ -53,6 +56,7 @@ class UserModel {
       'longitude': longitude,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
+      'photoUrl': photoUrl,
     };
   }
 }

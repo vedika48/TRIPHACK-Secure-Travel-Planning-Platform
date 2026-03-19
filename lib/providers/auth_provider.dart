@@ -45,7 +45,7 @@ class AuthProvider with ChangeNotifier {
       }
       _isLoading = false;
       notifyListeners();
-      return false;
+      rethrow;
     }
   }
 
@@ -172,7 +172,7 @@ class AuthProvider with ChangeNotifier {
           'uid': firebaseUser.uid,
           'name': userName,
           'email': userEmail ?? '',
-          'age': '',
+          'age': 0,
           'address': '',
           'latitude': 0.0,
           'longitude': 0.0,
@@ -270,7 +270,7 @@ class AuthProvider with ChangeNotifier {
       }
       _isLoading = false;
       notifyListeners();
-      return false;
+      rethrow;
     }
   }
 

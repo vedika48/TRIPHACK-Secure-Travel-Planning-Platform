@@ -1,4 +1,3 @@
-// providers/trip_planning_provider.dart
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/trip_plan.dart';
@@ -6,6 +5,8 @@ import '../services/firebase_service.dart';
 
 class TripPlanningProvider with ChangeNotifier {
   TripDetails _tripDetails = TripDetails(
+    source: '',
+    destination: '',
     startDate: DateTime.now(),
     endDate: DateTime.now().add(const Duration(days: 1)),
   );
@@ -27,7 +28,7 @@ class TripPlanningProvider with ChangeNotifier {
   TripPlan get currentTripPlan {
     return TripPlan(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
-      userId: 'current_user_id', // This should come from auth provider
+      userId: 'current_user_id',
       details: _tripDetails,
       flight: _selectedFlight,
       hotel: _selectedHotel,
@@ -86,7 +87,6 @@ class TripPlanningProvider with ChangeNotifier {
       setLoading(true);
       final tripPlan = currentTripPlan;
       await _firebaseService.saveTripPlan(tripPlan);
-      // Clear selections after saving
       clearSelections();
     } catch (e) {
       rethrow;
