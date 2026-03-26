@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../models/trip_plan.dart';
 import '../services/firebase_service.dart';
 
@@ -26,9 +26,10 @@ class TripPlanningProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
 
   TripPlan get currentTripPlan {
+    final userId = FirebaseAuth.instance.currentUser?.uid ?? 'unknown_user';
     return TripPlan(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
-      userId: 'current_user_id',
+      userId: userId,
       details: _tripDetails,
       flight: _selectedFlight,
       hotel: _selectedHotel,
@@ -84,6 +85,11 @@ class TripPlanningProvider with ChangeNotifier {
   // Firebase operations
   Future<void> saveTripPlan() async {
     try {
+      final currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) {
+        throw Exception('Must be logged in to save a trip plan');
+      }
+      
       setLoading(true);
       final tripPlan = currentTripPlan;
       await _firebaseService.saveTripPlan(tripPlan);
@@ -103,6 +109,19 @@ class TripPlanningProvider with ChangeNotifier {
       rethrow;
     } finally {
       setLoading(false);
+    }
+  }
+
+  Future<void> toggleFavorite(TripPlan plan) async {
+    try {
+      final newFavoriteStatus = !plan.isFavorite;
+      await _firebaseService.toggleFavorite(plan.id, newFavoriteStatus);
+      notifyListeners();
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error toggling favorite: $e');
+      }
+      rethrow;
     }
   }
 }

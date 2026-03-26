@@ -46,6 +46,18 @@ class FirebaseService {
     }
   }
 
+  // Toggle favorite status
+  Future<void> toggleFavorite(String tripId, bool isFavorite) async {
+    try {
+      await _firestore
+          .collection('trip_plans')
+          .doc(tripId)
+          .update({'isFavorite': isFavorite});
+    } catch (e) {
+      throw Exception('Failed to update favorite status: $e');
+    }
+  }
+
   // Delete trip plan
   Future<void> deleteTripPlan(String tripId) async {
     try {

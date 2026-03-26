@@ -256,8 +256,4 @@ class AgentProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

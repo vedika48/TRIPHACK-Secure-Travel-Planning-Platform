@@ -12,7 +12,12 @@
           "package_name": "com.example.travel_agent"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "286864483307-i1retvf3f9ju7lmh8n6sdkssjta7a6e0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDQjLX_waxgCuP-MJEFoQYGICW55eVsftc"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286864483307-i1retvf3f9ju7lmh8n6sdkssjta7a6e0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

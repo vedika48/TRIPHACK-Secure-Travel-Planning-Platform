@@ -353,39 +353,6 @@ class LoginScreenState extends State<LoginScreen> {
   Future<void> _handleLogin(AuthProvider authProvider, BuildContext context) async {
     if (!_formKey.currentState!.validate()) return;
 
-    final email = _emailController.text.trim();
-    final password = _passwordController.text;
-
-    // Admin bypass
-    if (email == 'admin@gmail.com' && password == 'newadmin') {
-      // Show admin login confirmation
-      if (!mounted) return;
-
-      // Optionally show a dialog confirming admin login
-      await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Admin Login'),
-          content: const Text('You are logging in as administrator.'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-                // Proceed with admin login
-                Navigator.pushReplacementNamed(context, '/home');
-              },
-              child: const Text('Continue'),
-            ),
-          ],
-        ),
-      );
-      return;
-    }
-
     try {
       final success = await authProvider.login(
         _emailController.text.trim(),

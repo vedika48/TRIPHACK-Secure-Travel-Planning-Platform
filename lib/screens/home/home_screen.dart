@@ -9,6 +9,7 @@ import '../chat/chat_screen.dart';
 import '../explore/explore_screen.dart';
 import '../profile/profile_screen.dart';
 import '../home/trip_plan_screen.dart';
+import 'my_trips_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -633,14 +634,17 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   void _showMyTrips() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('My Trips feature coming soon!')),
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const MyTripsScreen()),
     );
   }
 
   void _showFavorites() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Favorites feature coming soon!')),
+    // Navigate to MyTripsScreen, we can enhance this to start on Favorites tab later
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const MyTripsScreen()),
     );
   }
 }

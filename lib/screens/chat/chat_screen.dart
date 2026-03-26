@@ -167,7 +167,7 @@ class _ChatScreenState extends State<ChatScreen> {
       padding: EdgeInsets.all(16),
       child: Row(
         children: [
-          Container(
+          SizedBox(
             width: 16,
             height: 16,
             child: CircularProgressIndicator(
@@ -208,8 +208,8 @@ class _ChatScreenState extends State<ChatScreen> {
           SizedBox(width: 8),
           FloatingActionButton(
             onPressed: _isLoading ? null : () => _sendMessage(_messageController.text),
-            child: Icon(Icons.send),
             mini: true,
+            child: Icon(Icons.send),
           ),
         ],
       ),

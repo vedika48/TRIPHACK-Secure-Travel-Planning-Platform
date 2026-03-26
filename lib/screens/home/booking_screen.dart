@@ -399,7 +399,7 @@ class _FlightBookingTabState extends State<FlightBookingTab> {
         if (_flights.isEmpty)
           _buildEmptyState()
         else
-          ..._flights.map((flight) => _buildFlightCard(flight, tripProvider)).toList(),
+          ..._flights.map((flight) => _buildFlightCard(flight, tripProvider)),
       ],
     );
   }
@@ -829,7 +829,7 @@ class _HotelBookingTabState extends State<HotelBookingTab> {
         if (_hotels.isEmpty)
           _buildEmptyState()
         else
-          ..._hotels.map((hotel) => _buildHotelCard(hotel, tripProvider)).toList(),
+          ..._hotels.map((hotel) => _buildHotelCard(hotel, tripProvider)),
       ],
     );
   }
@@ -1274,7 +1274,7 @@ class _TransportBookingTabState extends State<TransportBookingTab> {
         if (_transportOptions.isEmpty)
           _buildEmptyState()
         else
-          ..._transportOptions.map((transport) => _buildTransportCard(transport, tripProvider)).toList(),
+          ..._transportOptions.map((transport) => _buildTransportCard(transport, tripProvider)),
       ],
     );
   }
@@ -1743,7 +1743,7 @@ class _ActivitiesBookingTabState extends State<ActivitiesBookingTab> {
         if (activities.isEmpty)
           _buildEmptyState()
         else
-          ...activities.map((activity) => _buildActivityCard(activity, tripProvider)).toList(),
+          ...activities.map((activity) => _buildActivityCard(activity, tripProvider)),
       ],
     );
   }

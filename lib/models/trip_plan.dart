@@ -85,6 +85,7 @@ class TripPlan {
   final List<TripService> localServices;
   final DateTime createdAt;
   final String status;
+  final bool isFavorite;
 
   TripPlan({
     required this.id,
@@ -96,6 +97,7 @@ class TripPlan {
     this.localServices = const [],
     required this.createdAt,
     this.status = 'planned',
+    this.isFavorite = false,
   });
 
   double get totalCost {
@@ -119,6 +121,7 @@ class TripPlan {
       'totalCost': totalCost,
       'createdAt': createdAt.toIso8601String(),
       'status': status,
+      'isFavorite': isFavorite,
     };
   }
 
@@ -143,6 +146,7 @@ class TripPlan {
       localServices: List<TripService>.from((map['localServices'] ?? []).map((service) => TripService.fromMap(service))),
       createdAt: DateTime.parse(map['createdAt']),
       status: map['status'] ?? 'planned',
+      isFavorite: map['isFavorite'] ?? false,
     );
   }
 }
